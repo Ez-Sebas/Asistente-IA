@@ -45,7 +45,10 @@ async function preguntarIA(mensajeSistema, mensajeUsuario) {
     }
 
     const datos = await respuesta.json();
-    return datos.choices[0].message.content;
+    return {
+        texto: datos.choices[0].message.content,
+        totalTokens: datos.usage ? datos.usage.total_tokens : null
+    };;
 }
 
 module.exports = {

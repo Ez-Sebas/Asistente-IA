@@ -1,0 +1,9 @@
+**Preguntas de repaso – Trabajo con archivos en Node.js (módulo fs)**  
+
+| # | Pregunta | Respuesta |
+|---|----------|-----------|
+| 1 | ¿Cuál es la diferencia principal entre `fs.readFileSync(ruta, 'utf8')` y `fs.readFileSync(ruta)` sin el segundo argumento? | `fs.readFileSync(ruta, 'utf8')` devuelve el contenido del archivo como una cadena de texto (string) codificada en UTF‑8. Si se omite `'utf8'`, Node devuelve un `Buffer` con los datos binarios, lo que requiere convertirlo a texto con `toString()` antes de usarlo. |
+| 2 | ¿Qué método usarías para añadir contenido al final de un archivo sin borrar lo que ya contiene y cómo se llama la variante asíncrona de ese método? | Para agregar contenido sin sobrescribir: `fs.appendFileSync(ruta, contenido)`. La variante asíncrona es `fs.appendFile(ruta, contenido, callback)` (o la versión basada en promesas `fs.promises.appendFile`). |
+| 3 | Explica brevemente por qué es recomendable usar `path.join()` al construir rutas de archivos y qué problema evita. | `path.join()` concatena los segmentos de ruta de manera segura, añadiendo los separadores de carpeta apropiados (`/` o `\`) según el sistema operativo. Evita errores de ruta, como duplicar separadores (`//`) o usar el separador incorrecto en Windows (`\`), y hace que el código sea portable entre diferentes plataformas. |
+
+¡Éxito revisando!

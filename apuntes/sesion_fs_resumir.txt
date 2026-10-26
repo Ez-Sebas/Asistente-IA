@@ -1,0 +1,5 @@
+- El módulo **fs** permite leer, escribir y modificar archivos de forma sincrónica (ej. `fs.readFileSync(ruta, 'utf8')`) o asincrónica, sin necesidad de instalar nada.  
+- Para crear o sobrescribir archivos se usa `fs.writeFileSync(ruta, contenido)`, mientras que `fs.appendFileSync(ruta, contenido)` añade datos al final sin borrar el contenido previo.  
+- Se recomienda validar la existencia de un archivo con `fs.existsSync(ruta)` antes de leerlo.  
+- La construcción segura de rutas se facilita con el módulo **path** (`path.join()`, `path.dirname()`, `path.basename()`, `path.extname()`).  
+- Las operaciones sincrónicas bloquean el programa y son útiles para scripts pequeños; las asincrónicas (callbacks o promesas) no bloquean y son preferibles para aplicaciones más complejas.

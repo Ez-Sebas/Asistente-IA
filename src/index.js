@@ -134,6 +134,7 @@ async function main() {
     try {
         // Llamar a la IA
         const resultado = await preguntarIA(MODOS[modo], textoAEnviar);
+        const texto = resultado.texto;
 
         // Construir la ruta de salida: <nombre>_<modo>.txt junto al archivo de entrada
         const dir = path.dirname(archivo);
@@ -141,11 +142,9 @@ async function main() {
         const rutaSalida = path.join(dir, `${base}_${modo}.txt`);
 
         // Guardar el resultado
-        fs.writeFileSync(rutaSalida, resultado);
-
-        // Mostrar en consola
+        fs.writeFileSync(rutaSalida, texto);
         console.log('--- Resultado ---');
-        console.log(resultado);
+        console.log(texto);
         console.log('-----------------');
         console.log(`Guardado en: ${rutaSalida}`);
 
@@ -156,8 +155,8 @@ async function main() {
             modo,
             modelo: process.env.MODEL,
             caracteresEntrada: textoAEnviar.length,
-            caracteresSalida: resultado.length,
-            tokens: null // la API no devuelve usage en este flujo simple
+            caracteresSalida: texto.length,
+            tokens: resultado.totalTokens 
         });
 
     } catch (error) {
