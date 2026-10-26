@@ -165,11 +165,11 @@ async function main() {
             console.log('La API tardó demasiado en responder.');
         } else if (error instanceof TypeError) {
             console.log('No se pudo conectar. Revisa tu internet o la API_URL.');
-        } else if (error.message.includes('401')) {
+        } else if (error.message.startsWith('401')) {
             console.log('La API key no es válida. Revisa tu archivo .env.');
-        } else if (error.message.includes('429')) {
-            console.log('Superaste el límite. Espera unos segundos e inténtalo de nuevo.');
-        } else if (error.message.includes('404')) {
+        } else if (error.message.startsWith('429')) {
+            console.log(error.message); // ya trae el mensaje con el retry-after
+        } else if (error.message.startsWith('404')) {
             console.log('Recurso no encontrado. Revisa el nombre del modelo o la API_URL.');
         } else {
             console.log('Error: ' + error.message);

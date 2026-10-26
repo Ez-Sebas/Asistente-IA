@@ -33,6 +33,13 @@ async function preguntarIA(mensajeSistema, mensajeUsuario) {
 
     if (!respuesta.ok) {
         let mensajeError = `Error ${respuesta.status}`;
+
+        // Caso 429: incluir el tiempo de espera del encabezado retry-after
+        if (respuesta.status === 429) {
+            const retryAfter = respuesta.headers.get('retry-after');
+            throw new Error(`429: Superaste el límite de peticiones. Espera ${retryAfter || 'unos'} segundos e inténtalo de nuevo.`);
+        }
+
         try {
             const cuerpo = await respuesta.json();
             if (cuerpo.error && cuerpo.error.message) {
