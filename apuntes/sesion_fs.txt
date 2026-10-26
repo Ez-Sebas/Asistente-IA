@@ -1,0 +1,15 @@
+Sesión 4: Trabajo con archivos en Node.js usando el módulo fs.
+
+El módulo fs (file system) permite leer, escribir y modificar archivos en Node.js. Es un módulo nativo, así que no hay que instalar nada con npm.
+
+Para leer un archivo de forma síncrona se usa fs.readFileSync(ruta, 'utf8'). El segundo argumento 'utf8' es importante porque sin él Node devuelve un Buffer (datos binarios) en lugar de texto.
+
+Para escribir se usa fs.writeFileSync(ruta, contenido). Esta función crea el archivo si no existe o lo sobrescribe si ya existe.
+
+Para agregar contenido al final de un archivo sin borrar lo que ya hay, se usa fs.appendFileSync(ruta, contenido).
+
+La ruta de los archivos se construye mejor con el módulo path: path.join() une segmentos de ruta de forma segura según el sistema operativo. path.dirname() devuelve la carpeta de un archivo, path.basename() el nombre del archivo y path.extname() la extensión.
+
+Es importante validar si un archivo existe antes de leerlo con fs.existsSync(ruta).
+
+Las operaciones con fs tienen versión síncrona (con Sync al final, bloquean el programa) y asíncrona (con callbacks o promesas, no bloquean). Para programas pequeños de consola la versión síncrona es más simple.
